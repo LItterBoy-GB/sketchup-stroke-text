@@ -1,0 +1,26 @@
+{
+  "sketchup_version": "22.0.354",
+  "font_sha256": "2a6fd6e9100c8172880b1f3bb4b38c89142e2082dbf7daaf6ce1c2349924ba27",
+  "sample_text": "结构图厅卫电门墙 警馨赢戴藏",
+  "original_penplot": {
+    "edges": 487,
+    "faces": 0
+  },
+  "improved": {
+    "edges": 484,
+    "faces": 0
+  },
+  "native_simhei_filled_flat": {
+    "edges": 1100,
+    "faces": 49,
+    "tolerance": 0.0
+  },
+  "scales_checked_em_mm": [
+    3.5,
+    100.0
+  ],
+  "same_edge_count_at_both_scales": true,
+  "source_model_restored": true,
+  "scope": "Counts apply to this sample and these font/curve settings; the full font has not been manually reviewed glyph by glyph.",
+  "font_format_note": "Runtime geometry used the same font text with CRLF; published bytes were normalized to LF afterwards. The generator and finalizer were subsequently updated to emit LF; glyph geometry was unchanged."
+}

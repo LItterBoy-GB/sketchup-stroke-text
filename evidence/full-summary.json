@@ -1,0 +1,21 @@
+{
+  "font_sha256": "2a6fd6e9100c8172880b1f3bb4b38c89142e2082dbf7daaf6ce1c2349924ba27",
+  "glyph_records": 7126,
+  "nonempty_glyphs": 7124,
+  "spaces": [
+    "U+0020",
+    "U+3000"
+  ],
+  "space_advances": {
+    "U+0020": 1.7127403846153846,
+    "U+3000": 7.692307692307692
+  },
+  "missing_requested": [],
+  "gb2312_level1_nonempty": 3755,
+  "gb2312_level2_nonempty": 3008,
+  "generated_segments": 250570,
+  "cycle_tails_removed": 3129,
+  "dot_fallbacks": 14,
+  "junction_guard_changed_glyphs": 248,
+  "junction_guard_restored_tails": 264
+}

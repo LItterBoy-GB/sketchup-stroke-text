@@ -1,0 +1,1183 @@
+{
+  "source_font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+  "resolution": 256,
+  "rdp_tolerance_px": 1.92,
+  "font_em_px": 332.8,
+  "prune_cycle_tails": true,
+  "characters": {
+    "岽": {
+      "paths": 17,
+      "segments": 31,
+      "source_graph_nodes": 1014,
+      "source_graph_edges": 1010,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "伍": {
+      "paths": 13,
+      "segments": 19,
+      "source_graph_nodes": 982,
+      "source_graph_edges": 981,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "埽": {
+      "paths": 15,
+      "segments": 27,
+      "source_graph_nodes": 1183,
+      "source_graph_edges": 1180,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "淖": {
+      "paths": 15,
+      "segments": 23,
+      "source_graph_nodes": 1027,
+      "source_graph_edges": 1025,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "觏": {
+      "paths": 38,
+      "segments": 52,
+      "source_graph_nodes": 1783,
+      "source_graph_edges": 1786,
+      "source_junction_nodes": 18,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "互": {
+      "paths": 8,
+      "segments": 12,
+      "source_graph_nodes": 889,
+      "source_graph_edges": 889,
+      "source_junction_nodes": 4,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "短": {
+      "paths": 17,
+      "segments": 31,
+      "source_graph_nodes": 1133,
+      "source_graph_edges": 1129,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "匣": {
+      "paths": 12,
+      "segments": 16,
+      "source_graph_nodes": 1300,
+      "source_graph_edges": 1302,
+      "source_junction_nodes": 7,
+      "removed_cycle_tails": [
+        {
+          "length_px": 7.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            139,
+            85
+          ]
+        },
+        {
+          "length_px": 6.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            139,
+            217
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "绩": {
+      "paths": 20,
+      "segments": 36,
+      "source_graph_nodes": 1237,
+      "source_graph_edges": 1231,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "堰": {
+      "paths": 23,
+      "segments": 43,
+      "source_graph_nodes": 1470,
+      "source_graph_edges": 1470,
+      "source_junction_nodes": 11,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "哞": {
+      "paths": 16,
+      "segments": 26,
+      "source_graph_nodes": 1064,
+      "source_graph_edges": 1062,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "冼": {
+      "paths": 14,
+      "segments": 28,
+      "source_graph_nodes": 894,
+      "source_graph_edges": 891,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "焉": {
+      "paths": 17,
+      "segments": 29,
+      "source_graph_nodes": 1216,
+      "source_graph_edges": 1211,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "刀": {
+      "paths": 3,
+      "segments": 16,
+      "source_graph_nodes": 677,
+      "source_graph_edges": 676,
+      "source_junction_nodes": 1,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "腴": {
+      "paths": 18,
+      "segments": 39,
+      "source_graph_nodes": 1387,
+      "source_graph_edges": 1387,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "嗽": {
+      "paths": 24,
+      "segments": 47,
+      "source_graph_nodes": 1476,
+      "source_graph_edges": 1476,
+      "source_junction_nodes": 11,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "蕨": {
+      "paths": 25,
+      "segments": 45,
+      "source_graph_nodes": 1391,
+      "source_graph_edges": 1386,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "柴": {
+      "paths": 19,
+      "segments": 38,
+      "source_graph_nodes": 1170,
+      "source_graph_edges": 1167,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "俦": {
+      "paths": 22,
+      "segments": 33,
+      "source_graph_nodes": 1173,
+      "source_graph_edges": 1170,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "枘": {
+      "paths": 18,
+      "segments": 34,
+      "source_graph_nodes": 1199,
+      "source_graph_edges": 1199,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "籀": {
+      "paths": 41,
+      "segments": 68,
+      "source_graph_nodes": 1631,
+      "source_graph_edges": 1632,
+      "source_junction_nodes": 21,
+      "removed_cycle_tails": [
+        {
+          "length_px": 4.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            232,
+            117
+          ]
+        },
+        {
+          "length_px": 3.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            232,
+            229
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "今": {
+      "paths": 7,
+      "segments": 22,
+      "source_graph_nodes": 667,
+      "source_graph_edges": 664,
+      "source_junction_nodes": 2,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "谋": {
+      "paths": 23,
+      "segments": 39,
+      "source_graph_nodes": 1219,
+      "source_graph_edges": 1218,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "蹑": {
+      "paths": 36,
+      "segments": 56,
+      "source_graph_nodes": 1710,
+      "source_graph_edges": 1713,
+      "source_junction_nodes": 21,
+      "removed_cycle_tails": [
+        {
+          "length_px": 16.414213562373096,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            16,
+            127
+          ]
+        },
+        {
+          "length_px": 21.414213562373096,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            16,
+            222
+          ]
+        },
+        {
+          "length_px": 17.82842712474619,
+          "local_width_px": 17.88854381999832,
+          "junction_yx": [
+            108,
+            127
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "镟": {
+      "paths": 28,
+      "segments": 59,
+      "source_graph_nodes": 1477,
+      "source_graph_edges": 1474,
+      "source_junction_nodes": 12,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "辇": {
+      "paths": 37,
+      "segments": 56,
+      "source_graph_nodes": 1418,
+      "source_graph_edges": 1416,
+      "source_junction_nodes": 16,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "柝": {
+      "paths": 18,
+      "segments": 32,
+      "source_graph_nodes": 1073,
+      "source_graph_edges": 1071,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "糖": {
+      "paths": 29,
+      "segments": 46,
+      "source_graph_nodes": 1635,
+      "source_graph_edges": 1634,
+      "source_junction_nodes": 13,
+      "removed_cycle_tails": [
+        {
+          "length_px": 8.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            229,
+            146
+          ]
+        },
+        {
+          "length_px": 8.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            229,
+            232
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "遘": {
+      "paths": 35,
+      "segments": 50,
+      "source_graph_nodes": 1647,
+      "source_graph_edges": 1650,
+      "source_junction_nodes": 15,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "疾": {
+      "paths": 18,
+      "segments": 36,
+      "source_graph_nodes": 1112,
+      "source_graph_edges": 1110,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "援": {
+      "paths": 30,
+      "segments": 55,
+      "source_graph_nodes": 1448,
+      "source_graph_edges": 1445,
+      "source_junction_nodes": 13,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "鳐": {
+      "paths": 30,
+      "segments": 46,
+      "source_graph_nodes": 1482,
+      "source_graph_edges": 1480,
+      "source_junction_nodes": 13,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "冥": {
+      "paths": 10,
+      "segments": 25,
+      "source_graph_nodes": 1237,
+      "source_graph_edges": 1235,
+      "source_junction_nodes": 4,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "笏": {
+      "paths": 18,
+      "segments": 38,
+      "source_graph_nodes": 1085,
+      "source_graph_edges": 1083,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "雹": {
+      "paths": 21,
+      "segments": 46,
+      "source_graph_nodes": 1522,
+      "source_graph_edges": 1518,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "煲": {
+      "paths": 17,
+      "segments": 47,
+      "source_graph_nodes": 1218,
+      "source_graph_edges": 1213,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "殊": {
+      "paths": 22,
+      "segments": 45,
+      "source_graph_nodes": 1249,
+      "source_graph_edges": 1248,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "轲": {
+      "paths": 17,
+      "segments": 29,
+      "source_graph_nodes": 1130,
+      "source_graph_edges": 1128,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [
+        {
+          "length_px": 19.0,
+          "local_width_px": 16.0,
+          "junction_yx": [
+            167,
+            139
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "铍": {
+      "paths": 23,
+      "segments": 47,
+      "source_graph_nodes": 1278,
+      "source_graph_edges": 1277,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "昏": {
+      "paths": 15,
+      "segments": 29,
+      "source_graph_nodes": 1263,
+      "source_graph_edges": 1264,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [
+        {
+          "length_px": 9.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            224,
+            66
+          ]
+        },
+        {
+          "length_px": 7.0,
+          "local_width_px": 22.0,
+          "junction_yx": [
+            224,
+            205
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "墁": {
+      "paths": 23,
+      "segments": 49,
+      "source_graph_nodes": 1471,
+      "source_graph_edges": 1473,
+      "source_junction_nodes": 12,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "鸫": {
+      "paths": 15,
+      "segments": 35,
+      "source_graph_nodes": 1175,
+      "source_graph_edges": 1169,
+      "source_junction_nodes": 4,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "宽": {
+      "paths": 13,
+      "segments": 35,
+      "source_graph_nodes": 1064,
+      "source_graph_edges": 1059,
+      "source_junction_nodes": 3,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "历": {
+      "paths": 6,
+      "segments": 20,
+      "source_graph_nodes": 914,
+      "source_graph_edges": 912,
+      "source_junction_nodes": 2,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "浑": {
+      "paths": 19,
+      "segments": 26,
+      "source_graph_nodes": 949,
+      "source_graph_edges": 944,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "穸": {
+      "paths": 10,
+      "segments": 34,
+      "source_graph_nodes": 953,
+      "source_graph_edges": 949,
+      "source_junction_nodes": 3,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "阙": {
+      "paths": 21,
+      "segments": 40,
+      "source_graph_nodes": 1309,
+      "source_graph_edges": 1302,
+      "source_junction_nodes": 7,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "鲫": {
+      "paths": 25,
+      "segments": 45,
+      "source_graph_nodes": 1664,
+      "source_graph_edges": 1668,
+      "source_junction_nodes": 14,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "照": {
+      "paths": 14,
+      "segments": 34,
+      "source_graph_nodes": 1245,
+      "source_graph_edges": 1241,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [
+        {
+          "length_px": 12.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            147,
+            40
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "擀": {
+      "paths": 31,
+      "segments": 47,
+      "source_graph_nodes": 1383,
+      "source_graph_edges": 1384,
+      "source_junction_nodes": 14,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "骗": {
+      "paths": 25,
+      "segments": 46,
+      "source_graph_nodes": 1620,
+      "source_graph_edges": 1621,
+      "source_junction_nodes": 12,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "熊": {
+      "paths": 22,
+      "segments": 54,
+      "source_graph_nodes": 1295,
+      "source_graph_edges": 1289,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "梳": {
+      "paths": 21,
+      "segments": 45,
+      "source_graph_nodes": 1189,
+      "source_graph_edges": 1184,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "网": {
+      "paths": 11,
+      "segments": 34,
+      "source_graph_nodes": 1121,
+      "source_graph_edges": 1118,
+      "source_junction_nodes": 4,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "几": {
+      "paths": 1,
+      "segments": 14,
+      "source_graph_nodes": 598,
+      "source_graph_edges": 597,
+      "source_junction_nodes": 0,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "绿": {
+      "paths": 20,
+      "segments": 36,
+      "source_graph_nodes": 1177,
+      "source_graph_edges": 1173,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "瘢": {
+      "paths": 21,
+      "segments": 54,
+      "source_graph_nodes": 1511,
+      "source_graph_edges": 1506,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [
+        {
+          "length_px": 9.0,
+          "local_width_px": 16.0,
+          "junction_yx": [
+            149,
+            181
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "账": {
+      "paths": 12,
+      "segments": 27,
+      "source_graph_nodes": 1177,
+      "source_graph_edges": 1172,
+      "source_junction_nodes": 3,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "锣": {
+      "paths": 23,
+      "segments": 42,
+      "source_graph_nodes": 1295,
+      "source_graph_edges": 1295,
+      "source_junction_nodes": 11,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "琏": {
+      "paths": 23,
+      "segments": 35,
+      "source_graph_nodes": 1162,
+      "source_graph_edges": 1158,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "泵": {
+      "paths": 14,
+      "segments": 40,
+      "source_graph_nodes": 1147,
+      "source_graph_edges": 1145,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "胃": {
+      "paths": 15,
+      "segments": 26,
+      "source_graph_nodes": 1376,
+      "source_graph_edges": 1380,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "碜": {
+      "paths": 24,
+      "segments": 52,
+      "source_graph_nodes": 1252,
+      "source_graph_edges": 1248,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "唪": {
+      "paths": 26,
+      "segments": 36,
+      "source_graph_nodes": 1298,
+      "source_graph_edges": 1298,
+      "source_junction_nodes": 12,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "晖": {
+      "paths": 18,
+      "segments": 25,
+      "source_graph_nodes": 1191,
+      "source_graph_edges": 1190,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [
+        {
+          "length_px": 21.414213562373096,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            172,
+            35
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "敫": {
+      "paths": 24,
+      "segments": 53,
+      "source_graph_nodes": 1345,
+      "source_graph_edges": 1346,
+      "source_junction_nodes": 13,
+      "removed_cycle_tails": [
+        {
+          "length_px": 17.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            66,
+            225
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "侍": {
+      "paths": 15,
+      "segments": 25,
+      "source_graph_nodes": 1002,
+      "source_graph_edges": 999,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "丌": {
+      "paths": 5,
+      "segments": 10,
+      "source_graph_nodes": 608,
+      "source_graph_edges": 607,
+      "source_junction_nodes": 2,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "镎": {
+      "paths": 27,
+      "segments": 47,
+      "source_graph_nodes": 1421,
+      "source_graph_edges": 1418,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "嬗": {
+      "paths": 17,
+      "segments": 47,
+      "source_graph_nodes": 1651,
+      "source_graph_edges": 1650,
+      "source_junction_nodes": 7,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "道": {
+      "paths": 20,
+      "segments": 36,
+      "source_graph_nodes": 1321,
+      "source_graph_edges": 1321,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "宓": {
+      "paths": 11,
+      "segments": 30,
+      "source_graph_nodes": 962,
+      "source_graph_edges": 957,
+      "source_junction_nodes": 3,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "跻": {
+      "paths": 18,
+      "segments": 38,
+      "source_graph_nodes": 1199,
+      "source_graph_edges": 1197,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [
+        {
+          "length_px": 24.414213562373096,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            48,
+            147
+          ]
+        },
+        {
+          "length_px": 23.414213562373096,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            48,
+            221
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "跖": {
+      "paths": 16,
+      "segments": 28,
+      "source_graph_nodes": 1218,
+      "source_graph_edges": 1218,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [
+        {
+          "length_px": 13.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            212,
+            152
+          ]
+        },
+        {
+          "length_px": 11.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            212,
+            235
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "垃": {
+      "paths": 12,
+      "segments": 18,
+      "source_graph_nodes": 834,
+      "source_graph_edges": 829,
+      "source_junction_nodes": 3,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "叠": {
+      "paths": 40,
+      "segments": 77,
+      "source_graph_nodes": 1892,
+      "source_graph_edges": 1893,
+      "source_junction_nodes": 21,
+      "removed_cycle_tails": [
+        {
+          "length_px": 5.0,
+          "local_width_px": 13.416407864998739,
+          "junction_yx": [
+            112,
+            115
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "禄": {
+      "paths": 20,
+      "segments": 38,
+      "source_graph_nodes": 1196,
+      "source_graph_edges": 1192,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "溏": {
+      "paths": 20,
+      "segments": 30,
+      "source_graph_nodes": 1297,
+      "source_graph_edges": 1295,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [
+        {
+          "length_px": 8.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            229,
+            130
+          ]
+        },
+        {
+          "length_px": 8.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            229,
+            227
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "妊": {
+      "paths": 16,
+      "segments": 30,
+      "source_graph_nodes": 1058,
+      "source_graph_edges": 1057,
+      "source_junction_nodes": 7,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "绔": {
+      "paths": 22,
+      "segments": 50,
+      "source_graph_nodes": 1180,
+      "source_graph_edges": 1178,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "恭": {
+      "paths": 18,
+      "segments": 32,
+      "source_graph_nodes": 1078,
+      "source_graph_edges": 1074,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "炉": {
+      "paths": 10,
+      "segments": 26,
+      "source_graph_nodes": 899,
+      "source_graph_edges": 896,
+      "source_junction_nodes": 4,
+      "removed_cycle_tails": [
+        {
+          "length_px": 16.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            127,
+            236
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "椹": {
+      "paths": 29,
+      "segments": 36,
+      "source_graph_nodes": 1418,
+      "source_graph_edges": 1417,
+      "source_junction_nodes": 13,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "踹": {
+      "paths": 20,
+      "segments": 31,
+      "source_graph_nodes": 1433,
+      "source_graph_edges": 1431,
+      "source_junction_nodes": 9,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "抗": {
+      "paths": 11,
+      "segments": 28,
+      "source_graph_nodes": 977,
+      "source_graph_edges": 973,
+      "source_junction_nodes": 3,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "徘": {
+      "paths": 18,
+      "segments": 24,
+      "source_graph_nodes": 995,
+      "source_graph_edges": 991,
+      "source_junction_nodes": 7,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "琮": {
+      "paths": 19,
+      "segments": 30,
+      "source_graph_nodes": 1051,
+      "source_graph_edges": 1045,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "樾": {
+      "paths": 35,
+      "segments": 60,
+      "source_graph_nodes": 1536,
+      "source_graph_edges": 1532,
+      "source_junction_nodes": 15,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "哐": {
+      "paths": 11,
+      "segments": 16,
+      "source_graph_nodes": 1147,
+      "source_graph_edges": 1145,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [
+        {
+          "length_px": 20.414213562373096,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            156,
+            36
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "荮": {
+      "paths": 20,
+      "segments": 33,
+      "source_graph_nodes": 1047,
+      "source_graph_edges": 1042,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "陛": {
+      "paths": 15,
+      "segments": 33,
+      "source_graph_nodes": 1220,
+      "source_graph_edges": 1216,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "咯": {
+      "paths": 19,
+      "segments": 38,
+      "source_graph_nodes": 1243,
+      "source_graph_edges": 1247,
+      "source_junction_nodes": 13,
+      "removed_cycle_tails": [
+        {
+          "length_px": 22.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            166,
+            35
+          ]
+        },
+        {
+          "length_px": 9.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            225,
+            130
+          ]
+        },
+        {
+          "length_px": 9.0,
+          "local_width_px": 20.0,
+          "junction_yx": [
+            225,
+            226
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "缛": {
+      "paths": 28,
+      "segments": 47,
+      "source_graph_nodes": 1404,
+      "source_graph_edges": 1399,
+      "source_junction_nodes": 11,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "嫣": {
+      "paths": 25,
+      "segments": 43,
+      "source_graph_nodes": 1393,
+      "source_graph_edges": 1388,
+      "source_junction_nodes": 10,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "虱": {
+      "paths": 12,
+      "segments": 30,
+      "source_graph_nodes": 1236,
+      "source_graph_edges": 1236,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "拶": {
+      "paths": 16,
+      "segments": 43,
+      "source_graph_nodes": 1091,
+      "source_graph_edges": 1086,
+      "source_junction_nodes": 5,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "酯": {
+      "paths": 26,
+      "segments": 41,
+      "source_graph_nodes": 1688,
+      "source_graph_edges": 1692,
+      "source_junction_nodes": 17,
+      "removed_cycle_tails": [
+        {
+          "length_px": 17.0,
+          "local_width_px": 16.0,
+          "junction_yx": [
+            215,
+            31
+          ]
+        },
+        {
+          "length_px": 14.414213562373096,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            215,
+            114
+          ]
+        },
+        {
+          "length_px": 14.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            215,
+            145
+          ]
+        },
+        {
+          "length_px": 13.0,
+          "local_width_px": 18.0,
+          "junction_yx": [
+            215,
+            231
+          ]
+        }
+      ],
+      "dot_fallback_count": 0
+    },
+    "糇": {
+      "paths": 29,
+      "segments": 54,
+      "source_graph_nodes": 1417,
+      "source_graph_edges": 1412,
+      "source_junction_nodes": 12,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "痄": {
+      "paths": 15,
+      "segments": 23,
+      "source_graph_nodes": 982,
+      "source_graph_edges": 979,
+      "source_junction_nodes": 6,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    },
+    "鼐": {
+      "paths": 17,
+      "segments": 43,
+      "source_graph_nodes": 1508,
+      "source_graph_edges": 1507,
+      "source_junction_nodes": 8,
+      "removed_cycle_tails": [],
+      "dot_fallback_count": 0
+    }
+  }
+}

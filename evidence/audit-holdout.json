@@ -1,0 +1,7 @@
+{
+  "glyphs": 100,
+  "segments": 3695,
+  "paths_with_samples_outside_thresholded_ink": 0,
+  "failed_glyphs": [],
+  "definition": "Checks samples every 0.5 raster pixel, not a continuous or typographic correctness proof."
+}

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*checkpoint*.json
+*checkpoint*.tmp
+*.otf
+*.ttf
+*.ttc
+/tools/fonts/*
+!/tools/fonts/.gitkeep
+/tools/data-*.json
+/tools/strokes-*.png
+/tools/audit-holdout.json
