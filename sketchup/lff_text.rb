@@ -66,18 +66,23 @@ module LFFText
     (0..n).map { |i| ang = start + theta * i / n; [cx + radius * Math.cos(ang), cy + radius * Math.sin(ang)] }
   end
 
-  # height and origin are SketchUp internal lengths (e.g. 100.mm).
+  # height, origin and letter_spacing are SketchUp internal lengths (e.g. 100.mm).
+  # letter_spacing is a fixed length between glyphs, so it does not scale with height.
   def self.draw(entities:, text:, font:, height:, origin: [0, 0, 0], width_factor: 1.0, letter_spacing: 0.0)
     raise ArgumentError, 'height and width_factor must be positive' unless height.to_f > 0 && width_factor.to_f > 0
     raise ArgumentError, 'font must be LFFText::Font' unless font.is_a?(Font)
     missing = text.each_char.reject { |c| c == "\n" || c == "\r" || c == ' ' || font.has?(c) }.uniq
+    # Geometry is laid out in font units and scaled by height/10 afterwards;
+    # convert the caller's fixed length into those units once.
+    scale = height.to_f / 10.0
+    spacing = letter_spacing.to_f / scale
     group = entities.add_group
     group.name = 'LFF text'
     group.set_attribute('LFFText', 'text', text)
     group.set_attribute('LFFText', 'font', File.basename(font.path))
     group.set_attribute('LFFText', 'height_inches', height.to_f)
     group.set_attribute('LFFText', 'width_factor', width_factor.to_f)
-    group.set_attribute('LFFText', 'letter_spacing_font_units', letter_spacing.to_f)
+    group.set_attribute('LFFText', 'letter_spacing_length', letter_spacing.to_f)
     x = 0.0; y = 0.0
     text.each_char do |char|
       next if char == "\r"
@@ -85,7 +90,7 @@ module LFFText
         x = 0.0; y -= 10.0 * font.line_spacing; next
       end
       if char == ' '
-        x += font.word_spacing + letter_spacing.to_f; next
+        x += font.word_spacing + spacing; next
       end
       paths = if font.has?(char)
                 font.glyph(char.ord)
@@ -99,12 +104,11 @@ module LFFText
           pts.each_cons(2) { |u, v| group.entities.add_line(u, v) unless u == v }
         end
       end
-      x += (font.advance(char) || max_x + font.letter_spacing) + letter_spacing.to_f
+      x += (font.advance(char) || max_x + font.letter_spacing) + spacing
     end
     # Intersecting closed strokes can induce faces in SketchUp; retain edges only.
     faces = group.entities.grep(Sketchup::Face)
     group.entities.erase_entities(faces) unless faces.empty?
-    scale = height.to_f / 10.0
     group.transform!(Geom::Transformation.scaling(scale))
     group.transform!(Geom::Transformation.translation(origin))
     { group: group, missing: missing }

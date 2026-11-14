@@ -1,4 +1,4 @@
-# SketchUp Stroke Text v0.1.0-preview
+# SketchUp Stroke Text v0.2.0-preview
 
 SketchUp Stroke Text 提供 SketchUp Ruby 单线文字绘制接口，并附带从开源 Noto Sans CJK SC 提取的试验性中文 LFF 字库。它适合探索 CAD 标注与绘图；**全字库尚未逐字人工校对，不应视为已经验证的标准工程字库**。
 
@@ -44,7 +44,7 @@ entities.add_stroke_text(text, height: 10.mm, font: nil, origin: [0, 0, 0],
                          width_factor: 1.0, letter_spacing: 0.0)
 ```
 
-`entities` 可以是 `model.active_entities`，也可以是已有组的 `group.entities`；原点在该容器的局部坐标中。`font` 默认为随包字体，也可以是 LFF 文件路径或已构造的 `LFFText::Font`。默认字体按路径缓存。`height` 是字体 em 高度，并非每个字的实际可见高度；`width_factor` 为横向比例，`letter_spacing` 为额外字体单位。缺字显示为方框，不自动切换字体；返回组的 `LFFText` 字典中 `missing_chars` 保存去重缺字数组，`text` 保存原文。输出是边组成的组而非可编辑文字实体。`# Advance` 是配套读取器支持的 LFF 注释扩展，其他 LFF 读取器不一定读取。
+`entities` 可以是 `model.active_entities`，也可以是已有组的 `group.entities`；原点在该容器的局部坐标中。`font` 默认为随包字体，也可以是 LFF 文件路径或已构造的 `LFFText::Font`。默认字体按路径缓存。`height` 是字体 em 高度，并非每个字的实际可见高度；`width_factor` 为横向比例；`letter_spacing` 是与 `height`、`origin` 同类的 SketchUp 长度（如 `2.mm`），表示字与字之间额外增加的距离，不随 `height` 放大。缺字显示为方框，不自动切换字体；返回组的 `LFFText` 字典中 `missing_chars` 保存去重缺字数组，`text` 保存原文，`letter_spacing_length` 保存传入的字距长度。输出是边组成的组而非可编辑文字实体。`# Advance` 是配套读取器支持的 LFF 注释扩展，其他 LFF 读取器不一定读取。
 
 ```ruby
 # Draw inside an existing group; this uses that group's local coordinates.

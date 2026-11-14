@@ -4,7 +4,7 @@
 require_relative 'lff_text'
 
 module SketchupStrokeText
-  VERSION = '0.1.0' unless const_defined?(:VERSION, false)
+  VERSION = '0.2.0' unless const_defined?(:VERSION, false)
   DEFAULT_FONT_PATH = File.expand_path('../fonts/hei-improved.lff', __dir__) unless const_defined?(:DEFAULT_FONT_PATH, false)
 
   def self.resolve_font(font)
@@ -21,6 +21,8 @@ module SketchupStrokeText
   end
 
   module EntitiesMethods
+    # letter_spacing is a SketchUp length (e.g. 2.mm), not a font unit, so the
+    # extra gap stays the same regardless of height.
     def add_stroke_text(text, height: 10.mm, font: nil, origin: [0, 0, 0], width_factor: 1.0, letter_spacing: 0.0)
       resolved = SketchupStrokeText.resolve_font(font)
       result = LFFText.draw(entities: self, text: text, font: resolved, height: height,

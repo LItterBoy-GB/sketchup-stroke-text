@@ -55,7 +55,7 @@ group = host.add_stroke_text(text, height: 20.mm, font: font, origin: [1, 2, 3],
 raise 'wrong return type' unless group.is_a?(Sketchup::Group) && host.first.equal?(group)
 raise 'missing list incorrect' unless group.attributes[['LFFText', 'missing_chars']] == [emoji]
 raise 'original text missing' unless group.attributes[['LFFText', 'text']] == text
-raise 'parameters not propagated' unless group.attributes[['LFFText', 'width_factor']] == 1.5 && group.attributes[['LFFText', 'letter_spacing_font_units']] == 0.25
+raise 'parameters not propagated' unless group.attributes[['LFFText', 'width_factor']] == 1.5 && group.attributes[['LFFText', 'letter_spacing_length']] == 0.25
 raise 'wrong transformation' unless group.transforms == [[:scale, 20.mm / 10.0], [:translation, [1, 2, 3]]]
 raise 'face retained' unless group.entities.grep(Sketchup::Face).empty?
 raise 'no geometry' unless group.entities.any?
@@ -66,4 +66,20 @@ rescue ArgumentError => e
   raise unless e.message.include?('font must')
 end
 
-puts 'PASS: safe loading, injection, cache, Group, parameters, missing glyphs, faces'
+# letter_spacing is a SketchUp length: the same spacing value must add the same
+# absolute width at any height. Geometry is laid out in font units and scaled by
+# height/10 afterwards, so undo that scale before comparing.
+def ink_width(host)
+  xs = host.flat_map { |e| e.is_a?(Array) ? [e[0][0], e[1][0]] : [] }
+  xs.max - xs.min
+end
+
+gaps = [20.mm, 200.mm].map do |h|
+  scale = h / 10.0
+  plain = ink_width(Sketchup::Entities.new.add_stroke_text('建建', height: h, font: font, letter_spacing: 0).entities)
+  spaced = ink_width(Sketchup::Entities.new.add_stroke_text('建建', height: h, font: font, letter_spacing: 5.mm).entities)
+  (spaced - plain) * scale  # 还原为实际长度
+end
+raise "letter_spacing scaled with height: #{gaps.inspect}" unless gaps.all? { |g| (g - 5.mm).abs < 1e-9 }
+
+puts 'PASS: safe loading, injection, cache, Group, parameters, missing glyphs, faces, letter spacing units'
