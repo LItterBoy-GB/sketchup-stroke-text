@@ -1,7 +1,7 @@
 {
-  "font_sha256": "50fdb086ac321b1317fc93bbc338809a81b1b49eeba586386c2e28ca79edbc9e",
-  "glyph_records": 7140,
-  "nonempty_glyphs": 7138,
+  "font_sha256": "cfe2204333537f245e2cba9a1e0fa33fefd300f5b088329ee4e7cd82cdf8b262",
+  "glyph_records": 7145,
+  "nonempty_glyphs": 7143,
   "spaces": [
     "U+0020",
     "U+3000"
@@ -13,13 +13,13 @@
   "missing_requested": [],
   "gb2312_level1_nonempty": 3755,
   "gb2312_level2_nonempty": 3008,
-  "generated_segments": 250992,
+  "generated_segments": 251094,
   "cycle_tails_removed": 3129,
   "dot_fallbacks": 14,
   "junction_guard_changed_glyphs": 248,
   "junction_guard_restored_tails": 264,
   "punctuation_added": {
-    "count": 14,
+    "count": 19,
     "codepoints": [
       "U+00C5",
       "U+00C6",
@@ -34,7 +34,53 @@
       "U+2207",
       "U+2473",
       "U+301C",
-      "U+FF5F"
+      "U+FF5F",
+      "U+00A1",
+      "U+00A2",
+      "U+00A3",
+      "U+00BF",
+      "U+2661"
+    ],
+    "excluded": [
+      "U+20BD (not in source cmap)"
+    ]
+  },
+  "dot_segments_lengthened": {
+    "count": 50,
+    "from_units": 0.015,
+    "to_units": 0.3,
+    "method": "only isolated two-point segments (both endpoints used once) in symbol blocks",
+    "codepoints": [
+      "U+0021",
+      "U+002E",
+      "U+003A",
+      "U+003B",
+      "U+003F",
+      "U+0069",
+      "U+006A",
+      "U+00A1",
+      "U+00A8",
+      "U+00B7",
+      "U+00BF",
+      "U+00F7",
+      "U+2022",
+      "U+2026",
+      "U+203B",
+      "U+2234",
+      "U+2235",
+      "U+2236",
+      "U+2237",
+      "U+2299",
+      "U+25A0",
+      "U+25C6",
+      "U+25CF",
+      "U+FF01",
+      "U+FF0E",
+      "U+FF1A",
+      "U+FF1B",
+      "U+FF1F",
+      "U+FF49",
+      "U+FF4A"
     ]
   }
 }
