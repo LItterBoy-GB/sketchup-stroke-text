@@ -1,4 +1,4 @@
-# SketchUp Stroke Text v0.2.0-preview
+# SketchUp Stroke Text v0.3.0-preview
 
 SketchUp Stroke Text 提供 SketchUp Ruby 单线文字绘制接口，并附带从开源 Noto Sans CJK SC 提取的试验性中文 LFF 字库。它适合探索 CAD 标注与绘图；**全字库尚未逐字人工校对，不应视为已经验证的标准工程字库**。
 
@@ -15,14 +15,14 @@ SketchUp Stroke Text is a Ruby interface for drawing single-line text in SketchU
 - 骨架图在交点切分并共享节点；简化线按半像素间隔检查源墨迹。它不保证连续几何始终在墨迹中，也不保证所有笔画结构正确。**点状笔画处理**：骨架化后点会退化为 0.015 字体单位的极短段。SketchUp 对短于 0.001 英寸（0.0254 mm）的边不渲染，3.5 mm 字高下该点只有 0.005 mm，因此不可见。本版把 50 个符号字符中的**孤立点**沿原方向、以原中点为中心拉长到 0.3 单位，在 3.5 mm 字高下为 0.105 mm，随字高等比缩放。判定条件为：符号区字符 + 两点单段 + 长度 < 0.05 单位 + 两端点都不被其他路径共享。因此 `!` `?` `;` `i` `j` `¡` `¿` `¨` `…` `∴` `∷` 等已修复，而箭头尖端、`※` 中心交叉、汉字笔画等与其他路径相连的短段保持不变。
 - **实心符号按空心轮廓绘制**：`■` `●` `◆` `▲` 是实心填充图形，单线字体无法表达填充，骨架化后坍缩为单个点。本版改用源字体中对应空心字符的轮廓（`□` `○` `◇` `△`），码位与字宽不变。这是单线字体的固有限制，不是可以修复的缺陷。
 - SketchUp 2022 样本中，“一”1 条边、“十”交点连通、“口”为 4 边闭环、“中”9 边且没有跨框斜线。样本文字在 3.5 mm 和 100 mm 名义 em 下边数一致，无面。整套字体仍需进一步复核。
-- `Sketchup::Entities#add_stroke_text` 已在 SketchUp 2022 22.0.354 / Ruby 2.7.2 中验证：返回组、默认字体缓存、重复加载、嵌套组局部坐标、符号、全角空格、缺字占位与属性均通过；标准文字生成 484 条边、0 个面，调用方事务可恢复。详见 [接口验收数据](evidence/entities-api-runtime.json)。
+- v0.3 直接向调用方的 `Sketchup::Entities` 写入边，返回结果 Hash；原 v0.2 返回组的接口已变更。字库和历史运行记录见 [接口验收数据](evidence/entities-api-runtime.json)，该记录针对旧接口。
 - 100 个未参与调参的汉字抽样见 [预览](evidence/strokes-holdout.png) 和 [结果](evidence/audit-holdout.json)。样本的 3,695 个线段按每 0.5 栅格像素取样，没有发现样点落在源墨迹外；该检查不是字形正确性证明。
 
 简化时保留独立墨迹分量；个别骨架化后消失的墨点以短线表示。一次独立抽检发现“申”的竖笔被误剪：其十字交点分成两个紧邻的三叉节点，被原规则误判为框角。现当局部笔画宽度范围内还有其他高阶节点时保留末梢；现场候选样本中“申”恢复上下竖伸，口、中等对照字保持原有拓扑。对曾被剪尾的 2,090 个字重新筛查后，248 个字共保留 264 条原会被删的末梢；清单见 [repair-report.json](evidence/repair-report.json)。自动规则仍可能误删或保留不理想笔画，小字、复杂字、符号和模型尺度请在实际用途下检查。
 
 ## SketchUp
 
-在 SketchUp Ruby 控制台加载本项目 `sketchup/sketchup_stroke_text.rb` 的完整路径，然后通过任意 `Sketchup::Entities` 容器调用。加载本身不会修改模型。调用返回 `Sketchup::Group`；调用方负责开启和结束事务。
+在 SketchUp Ruby 控制台加载本项目 `sketchup/sketchup_stroke_text.rb` 的完整路径，然后通过任意 `Sketchup::Entities` 容器调用。加载本身不会修改模型。需要 SketchUp 2022 或更新版本。调用直接向传入的实体集合写边并返回结果 Hash；调用方负责容器和事务。
 
 ```ruby
 # Replace the path with the local project location.
@@ -30,8 +30,9 @@ load '/path/to/sketchup-stroke-text/sketchup/sketchup_stroke_text.rb'
 model = Sketchup.active_model
 model.start_operation('Stroke text', true)
 begin
-  group = model.active_entities.add_stroke_text('建筑平面', height: 100.mm)
-  p group.get_attribute('LFFText', 'missing_chars')
+  group = model.active_entities.add_group # 如需分组，由调用方创建
+  result = group.entities.add_stroke_text('建筑平面', height: 100.mm)
+  p result[:missing]
   model.commit_operation
 rescue Exception
   model.abort_operation
@@ -43,14 +44,17 @@ end
 
 ```ruby
 entities.add_stroke_text(text, height: 10.mm, font: nil, origin: [0, 0, 0],
-                         width_factor: 1.0, letter_spacing: 0.0)
+                         width_factor: 1.0, letter_spacing: 0.0,
+                         line_spacing: nil, align: nil)
 ```
 
-`entities` 可以是 `model.active_entities`，也可以是已有组的 `group.entities`；原点在该容器的局部坐标中。`font` 默认为随包字体，也可以是 LFF 文件路径或已构造的 `LFFText::Font`。默认字体按路径缓存。`height` 是字体 em 高度，并非每个字的实际可见高度；`width_factor` 为横向比例；`letter_spacing` 是与 `height`、`origin` 同类的 SketchUp 长度（如 `2.mm`），表示字与字之间额外增加的距离，不随 `height` 放大。缺字显示为方框，不自动切换字体；返回组的 `LFFText` 字典中 `missing_chars` 保存去重缺字数组，`text` 保存原文，`letter_spacing_length` 保存传入的字距长度。输出是边组成的组而非可编辑文字实体。`# Advance` 是配套读取器支持的 LFF 注释扩展，其他 LFF 读取器不一定读取。
+`entities` 可以是 `model.active_entities` 或已有组的 `group.entities`，`origin` 在该容器局部坐标中。返回 `{ edges:, missing:, lines: }`：`edges` 是本次新增的有效边，不包含碰巧复用的已有边；`missing` 是去重缺字数组；`lines` 是每行的纯坐标布局。不会内部建组或变换已有实体，调用方负责开启事务、持久化属性以及选择容器。
+
+`font` 默认为随包字体，也可传 LFF 路径或 `LFFText::Font`；`height` 是 em 高度而非可见字高；`width_factor` 缩放横向字形，`letter_spacing` 是不随字高或宽度因子缩放的额外长度。`line_spacing` 默认使用字库行距，可传 SketchUp 长度；`align` 可选 `:left`、`:center`、`:right`，按可见边界对齐各行，默认 `nil` 保留原始基线与字形侧边距。缺字以方框表示。调用使用 `Entities#build`，不会生成面或与已有几何求交；端点相同的已有边可能被复用，不在返回的新增边中。极短段会合并或跳过以适应 SketchUp 容差。旧版本 SketchUp 不支持此直接写入接口。`# Advance` 是配套读取器的 LFF 注释扩展。
 
 ```ruby
 # Draw inside an existing group; this uses that group's local coordinates.
-nested = existing_group.entities.add_stroke_text('标高', height: 10.mm,
+result = existing_group.entities.add_stroke_text('标高', height: 10.mm,
                                                   origin: [0, 0, 0])
 ```
 

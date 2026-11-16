@@ -66,51 +66,111 @@ module LFFText
     (0..n).map { |i| ang = start + theta * i / n; [cx + radius * Math.cos(ang), cy + radius * Math.sin(ang)] }
   end
 
-  # height, origin and letter_spacing are SketchUp internal lengths (e.g. 100.mm).
-  # letter_spacing is a fixed length between glyphs, so it does not scale with height.
-  def self.draw(entities:, text:, font:, height:, origin: [0, 0, 0], width_factor: 1.0, letter_spacing: 0.0)
+  # Layout is pure Ruby. Coordinates are in the target entities' local units.
+  # line_spacing defaults to the font's line spacing, and may be overridden
+  # with a SketchUp length. Extra letter spacing is not affected by width_factor.
+  def self.layout(text:, font:, height:, origin: [0, 0, 0], width_factor: 1.0, letter_spacing: 0.0, line_spacing: nil, align: nil)
     raise ArgumentError, 'height and width_factor must be positive' unless height.to_f > 0 && width_factor.to_f > 0
     raise ArgumentError, 'font must be LFFText::Font' unless font.is_a?(Font)
-    missing = text.each_char.reject { |c| c == "\n" || c == "\r" || c == ' ' || font.has?(c) }.uniq
-    # Geometry is laid out in font units and scaled by height/10 afterwards;
-    # convert the caller's fixed length into those units once.
+    raise ArgumentError, 'align must be :left, :center, or :right' unless [nil, :left, :center, :right].include?(align)
+    origin = origin.to_a
+    raise ArgumentError, 'origin must contain three coordinates' unless origin.length == 3
     scale = height.to_f / 10.0
-    spacing = letter_spacing.to_f / scale
-    group = entities.add_group
-    group.name = 'LFF text'
-    group.set_attribute('LFFText', 'text', text)
-    group.set_attribute('LFFText', 'font', File.basename(font.path))
-    group.set_attribute('LFFText', 'height_inches', height.to_f)
-    group.set_attribute('LFFText', 'width_factor', width_factor.to_f)
-    group.set_attribute('LFFText', 'letter_spacing_length', letter_spacing.to_f)
-    x = 0.0; y = 0.0
-    text.each_char do |char|
-      next if char == "\r"
-      if char == "\n"
-        x = 0.0; y -= 10.0 * font.line_spacing; next
+    step = line_spacing.nil? ? height.to_f * font.line_spacing : line_spacing.to_f
+    missing = []
+    lines = text.to_s.split("\n", -1).each_with_index.map do |line, index|
+      x = 0.0
+      extra = 0.0
+      paths_out = []
+      line.each_char do |char|
+        next if char == "\r"
+        if char == ' '
+          x += font.word_spacing
+          extra += letter_spacing.to_f
+          next
+        end
+        paths = if font.has?(char)
+                  font.glyph(char.ord)
+                else
+                  missing << char unless missing.include?(char)
+                  [[[0.0, 0.0, 0], [8.0, 0.0, 0], [8.0, 10.0, 0], [0.0, 10.0, 0], [0.0, 0.0, 0]]]
+                end
+        max_x = paths.flat_map { |path| path.map { |point| point[0] } }.max || 8.0
+        paths.each do |path|
+          points = []
+          path.each_cons(2) do |a, b|
+            curve = segment(a, b)
+            points.concat(points.empty? ? curve : curve.drop(1))
+          end
+          points.map! { |p| [origin[0].to_f + (x + p[0]) * width_factor.to_f * scale + extra,
+                              origin[1].to_f + p[1] * scale - index * step, origin[2].to_f] }
+          paths_out << points unless points.empty?
+        end
+        x += font.advance(char) || max_x + font.letter_spacing
+        extra += letter_spacing.to_f
       end
-      if char == ' '
-        x += font.word_spacing + spacing; next
-      end
-      paths = if font.has?(char)
-                font.glyph(char.ord)
-              else
-                [[[0.0, 0.0, 0], [8.0, 0.0, 0], [8.0, 10.0, 0], [0.0, 10.0, 0], [0.0, 0.0, 0]]]
-              end
-      max_x = paths.flat_map { |p| p.map { |v| v[0] } }.max || 8.0
+      points = paths_out.flatten(1)
+      min_x, max_x = points.map { |p| p[0] }.minmax
+      { paths: paths_out, min_x: min_x, max_x: max_x }
+    end
+    max_width = lines.map { |line| line[:min_x] ? line[:max_x] - line[:min_x] : 0.0 }.max || 0.0
+    lines.each do |line|
+      next unless line[:min_x] && align
+      width = line[:max_x] - line[:min_x]
+      offset = case align
+               when :center then (max_width - width) / 2.0
+               when :right then max_width - width
+               else 0.0
+               end
+      offset += origin[0].to_f - line[:min_x]
+      line[:paths].each { |path| path.each { |point| point[0] += offset } }
+      line[:min_x] += offset
+      line[:max_x] += offset
+    end
+    { lines: lines, missing: missing }
+  end
+
+  # SketchUp rejects edges shorter than about 0.001 inch. Coalesce consecutive
+  # points before insertion so tiny tessellation segments do not abort a glyph.
+  def self.drawable_points(path, tolerance = 0.001)
+    return [] if path.length < 2
+    kept = [path.first]
+    path.drop(1).each do |point|
+      a = kept.last
+      distance = Math.sqrt(3.times.sum { |i| (point[i] - a[i])**2 })
+      kept << point if distance >= tolerance
+    end
+    last = path.last
+    if kept.length > 1 && kept.last != last
+      previous = kept[-2]
+      distance = Math.sqrt(3.times.sum { |i| (last[i] - previous[i])**2 })
+      kept[-1] = last if distance >= tolerance
+    end
+    kept.length > 1 ? kept : []
+  end
+
+  # Writes directly into entities, without creating a group or moving existing
+  # geometry. SketchUp 2022+ uses Entities#build to avoid creating faces.
+  def self.draw(entities:, text:, font:, height:, origin: [0, 0, 0], width_factor: 1.0, letter_spacing: 0.0, line_spacing: nil, align: nil)
+    result = layout(text: text, font: font, height: height, origin: origin,
+                    width_factor: width_factor, letter_spacing: letter_spacing,
+                    line_spacing: line_spacing, align: align)
+    paths = result[:lines].flat_map { |line| line[:paths] }.map { |path| drawable_points(path) }.reject(&:empty?)
+    if defined?(Sketchup::Edge)
+      existing = entities.grep(Sketchup::Edge).each_with_object({}) { |edge, hash| hash[edge] = true }
+    else
+      existing = {}
+    end
+    edges = []
+    raise NotImplementedError, 'direct stroke text requires SketchUp 2022+ Entities#build' unless entities.respond_to?(:build)
+    entities.build do |builder|
       paths.each do |path|
         path.each_cons(2) do |a, b|
-          pts = segment(a, b).map { |p| [(x + p[0]) * width_factor.to_f, y + p[1], 0] }
-          pts.each_cons(2) { |u, v| group.entities.add_line(u, v) unless u == v }
+          Array(builder.add_edges(a, b)).each { |edge| edges << edge if edge && !existing[edge] }
         end
       end
-      x += (font.advance(char) || max_x + font.letter_spacing) + spacing
     end
-    # Intersecting closed strokes can induce faces in SketchUp; retain edges only.
-    faces = group.entities.grep(Sketchup::Face)
-    group.entities.erase_entities(faces) unless faces.empty?
-    group.transform!(Geom::Transformation.scaling(scale))
-    group.transform!(Geom::Transformation.translation(origin))
-    { group: group, missing: missing }
+    result[:edges] = edges.uniq.select { |edge| !edge.respond_to?(:valid?) || edge.valid? }
+    result
   end
 end

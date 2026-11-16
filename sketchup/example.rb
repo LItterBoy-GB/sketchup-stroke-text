@@ -5,8 +5,9 @@ require_relative 'sketchup_stroke_text'
 model = Sketchup.active_model
 model.start_operation('Stroke text example', true)
 begin
-  group = model.active_entities.add_stroke_text('建筑平面', height: 100.mm)
-  p group.get_attribute('LFFText', 'missing_chars')
+  group = model.active_entities.add_group # The caller owns the container.
+  result = group.entities.add_stroke_text('建筑平面', height: 100.mm)
+  p result[:missing]
   model.commit_operation
 rescue Exception
   model.abort_operation
