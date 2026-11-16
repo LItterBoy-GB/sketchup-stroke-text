@@ -1,7 +1,7 @@
 {
-  "font_sha256": "2a6fd6e9100c8172880b1f3bb4b38c89142e2082dbf7daaf6ce1c2349924ba27",
-  "glyph_records": 7126,
-  "nonempty_glyphs": 7124,
+  "font_sha256": "50fdb086ac321b1317fc93bbc338809a81b1b49eeba586386c2e28ca79edbc9e",
+  "glyph_records": 7140,
+  "nonempty_glyphs": 7138,
   "spaces": [
     "U+0020",
     "U+3000"
@@ -13,9 +13,28 @@
   "missing_requested": [],
   "gb2312_level1_nonempty": 3755,
   "gb2312_level2_nonempty": 3008,
-  "generated_segments": 250570,
+  "generated_segments": 250992,
   "cycle_tails_removed": 3129,
   "dot_fallbacks": 14,
   "junction_guard_changed_glyphs": 248,
-  "junction_guard_restored_tails": 264
+  "junction_guard_restored_tails": 264,
+  "punctuation_added": {
+    "count": 14,
+    "codepoints": [
+      "U+00C5",
+      "U+00C6",
+      "U+00DF",
+      "U+00E5",
+      "U+00E6",
+      "U+00F8",
+      "U+2010",
+      "U+2194",
+      "U+2202",
+      "U+2205",
+      "U+2207",
+      "U+2473",
+      "U+301C",
+      "U+FF5F"
+    ]
+  }
 }
