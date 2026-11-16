@@ -1,5 +1,5 @@
 {
-  "font_sha256": "cfe2204333537f245e2cba9a1e0fa33fefd300f5b088329ee4e7cd82cdf8b262",
+  "font_sha256": "ec56dd74513785e4271b05a65d7020843776bb32b38de7f822d49a3d7d914b7a",
   "glyph_records": 7145,
   "nonempty_glyphs": 7143,
   "spaces": [
@@ -13,7 +13,7 @@
   "missing_requested": [],
   "gb2312_level1_nonempty": 3755,
   "gb2312_level2_nonempty": 3008,
-  "generated_segments": 251094,
+  "generated_segments": 251137,
   "cycle_tails_removed": 3129,
   "dot_fallbacks": 14,
   "junction_guard_changed_glyphs": 248,
@@ -82,5 +82,20 @@
       "U+FF49",
       "U+FF4A"
     ]
+  },
+  "solid_drawn_as_outline": {
+    "codepoints": [
+      "U+25A0",
+      "U+25CF",
+      "U+25C6",
+      "U+25B2"
+    ],
+    "outline_source": [
+      "U+25A1",
+      "U+25CB",
+      "U+25C7",
+      "U+25B3"
+    ],
+    "reason": "single-line font cannot fill shapes; solid glyphs collapsed to a point during skeletonization"
   }
 }
