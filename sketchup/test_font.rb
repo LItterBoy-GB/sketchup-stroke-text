@@ -11,4 +11,17 @@ xs=r[:lines].flat_map{|line| line[:paths].flatten(1).map{|p|p[0]}}
 expected=a+font.advance('A')+font.advance(space)
 raise 'space did not advance' unless xs.any?{|x| (x-expected).abs<0.00001}
 %w[⑳ ↔ ∂ ∇ ∅ ‐ 〜 ｟ æ Æ ø Å å ß ♡ ¢ £ ¡ ¿].each { |char| raise "missing #{char}" unless font.has?(char) }
-puts 'PASS: font parser, full-width advance, extension glyphs'
+sups=%w[⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹]
+sups.each { |char| raise "missing #{char}" unless font.has?(char) }
+# 上标由数字缩半后锚定原字形左上角：正好占原字形墨迹框的左上四分之一
+%w[0 1 2 3 4 5 6 7 8 9].zip(sups).each do |digit, sup|
+  d=font.glyph(digit.ord).flatten(1); s=font.glyph(sup.ord).flatten(1)
+  dx=d.map{|p|p[0]}; dy=d.map{|p|p[1]}; sx=s.map{|p|p[0]}; sy=s.map{|p|p[1]}
+  raise "#{sup} width not halved" unless ((sx.max-sx.min)-(dx.max-dx.min)*0.5).abs<0.000001
+  raise "#{sup} height not halved" unless ((sy.max-sy.min)-(dy.max-dy.min)*0.5).abs<0.000001
+  raise "#{sup} top moved" unless (sy.max-dy.max).abs<0.000001
+  raise "#{sup} left moved" unless (sx.min-dx.min).abs<0.000001
+  raise "#{sup} not in top-left quarter" unless sx.max<=(dx.min+dx.max)/2+0.000001 && sy.min>=(dy.min+dy.max)/2-0.000001
+  raise "#{sup} advance differs" unless (font.advance(sup).to_f-font.advance(digit).to_f).abs<1e-9
+end
+puts 'PASS: font parser, full-width advance, extension glyphs, superscript placement'

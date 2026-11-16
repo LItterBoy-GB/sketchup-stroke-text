@@ -1,7 +1,7 @@
 {
-  "font_sha256": "ec56dd74513785e4271b05a65d7020843776bb32b38de7f822d49a3d7d914b7a",
-  "glyph_records": 7145,
-  "nonempty_glyphs": 7143,
+  "font_sha256": "9b3e58495e554dbdc9808f2aea6721fbaf4f54c4e63fb60ee408f4d3d3c6b463",
+  "glyph_records": 7155,
+  "nonempty_glyphs": 7153,
   "spaces": [
     "U+0020",
     "U+3000"
@@ -13,7 +13,7 @@
   "missing_requested": [],
   "gb2312_level1_nonempty": 3755,
   "gb2312_level2_nonempty": 3008,
-  "generated_segments": 251137,
+  "generated_segments": 251298,
   "cycle_tails_removed": 3129,
   "dot_fallbacks": 14,
   "junction_guard_changed_glyphs": 248,
@@ -97,5 +97,26 @@
       "U+25B3"
     ],
     "reason": "single-line font cannot fill shapes; solid glyphs collapsed to a point during skeletonization"
+  },
+  "superscript_generated": {
+    "codepoints": [
+      "U+00B2",
+      "U+00B3",
+      "U+00B9",
+      "U+2070",
+      "U+2074",
+      "U+2075",
+      "U+2076",
+      "U+2077",
+      "U+2078",
+      "U+2079"
+    ],
+    "source_digits": "U+0030-U+0039",
+    "scale": 0.5,
+    "anchor": "top-left corner of the source digit ink box",
+    "advance": "same as the source digit (4.26682692)",
+    "added_paths": 24,
+    "added_segments": 161,
+    "reason": "source font lacks U+2070 and U+2079, so all ten are derived from the digits to stay consistent"
   }
 }

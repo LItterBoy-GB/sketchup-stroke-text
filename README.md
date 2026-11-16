@@ -10,8 +10,9 @@ SketchUp Stroke Text is a Ruby interface for drawing single-line text in SketchU
 
 ## 特点 / Status
 
-- 包含 GB 2312 一级 3,755 字、二级 3,008 字，以及基础字母、数字和部分符号；另有 `Φ`、`Ø`、`㎡`。共 7,145 个字形记录，其中 7,143 个非空，ASCII 与全角空格按字宽推进。原始 glyph 均先经源字体 Unicode cmap 验证。统计和字库哈希见 [full-summary.json](evidence/full-summary.json)。
-- 标点覆盖：ASCII 标点 32 个、中文常用标点 40 个（`，。、；：？！“”‘’（）《》〈〉【】〔〕「」『』—…·～` 等）均已包含。本版补充了 19 个扩展字符：`⑳ ↔ ∂ ∇ ∅ ‐ 〜 ｟ æ Æ ø Å å ß ♡ ¢ £ ¡ ¿`。其中 `Æ`、`æ`、`ø`、`ß` 等拉丁扩展字母因字符本身含交叉结构，骨架化后段数较多，观感与既有 ASCII 字母一致，未做人工校正。`₽`（卢布符号）不在源字体 cmap 中，未包含。
+- 包含 GB 2312 一级 3,755 字、二级 3,008 字，以及基础字母、数字和部分符号；另有 `Φ`、`Ø`、`㎡`。共 7,155 个字形记录，其中 7,153 个非空，ASCII 与全角空格按字宽推进。原始 glyph 均先经源字体 Unicode cmap 验证。统计和字库哈希见 [full-summary.json](evidence/full-summary.json)。
+- 标点覆盖：ASCII 标点 32 个、中文常用标点 40 个（`，。、；：？！“”‘’（）《》〈〉【】〔〕「」『』—…·～` 等）均已包含。本版补充了 29 个扩展字符：`⑳ ↔ ∂ ∇ ∅ ‐ 〜 ｟ æ Æ ø Å å ß ♡ ¢ £ ¡ ¿` 与上标数字 `⁰¹²³⁴⁵⁶⁷⁸⁹`。其中 `Æ`、`æ`、`ø`、`ß` 等拉丁扩展字母因字符本身含交叉结构，骨架化后段数较多，观感与既有 ASCII 字母一致，未做人工校正。`₽`（卢布符号）不在源字体 cmap 中，未包含。
+- **上标数字为合成字形**：源字体只有 `¹²³⁴⁵⁶⁷⁸`（U+00B9/B2/B3、U+2074–2078），缺 `⁰` 与 `⁹`（U+2070/U+2079），因此十个上标统一由对应数字字形按 0.5 等比缩小、锚定原字形左上角生成，正好占原字形墨迹框的左上四分之一，advance 与原数字相同。这样 `m²`、`10³`、`建筑²层` 这类写法可直接连写；上标顶边与数字大写高度齐平，缩放随字高等比变化。若后续源字体补齐或需要和专业字库完全一致的上标位置，需要重新核对并替换这 10 个字形。
 - 骨架图在交点切分并共享节点；简化线按半像素间隔检查源墨迹。它不保证连续几何始终在墨迹中，也不保证所有笔画结构正确。**点状笔画处理**：骨架化后点会退化为 0.015 字体单位的极短段。SketchUp 对短于 0.001 英寸（0.0254 mm）的边不渲染，3.5 mm 字高下该点只有 0.005 mm，因此不可见。本版把 50 个符号字符中的**孤立点**沿原方向、以原中点为中心拉长到 0.3 单位，在 3.5 mm 字高下为 0.105 mm，随字高等比缩放。判定条件为：符号区字符 + 两点单段 + 长度 < 0.05 单位 + 两端点都不被其他路径共享。因此 `!` `?` `;` `i` `j` `¡` `¿` `¨` `…` `∴` `∷` 等已修复，而箭头尖端、`※` 中心交叉、汉字笔画等与其他路径相连的短段保持不变。
 - **实心符号按空心轮廓绘制**：`■` `●` `◆` `▲` 是实心填充图形，单线字体无法表达填充，骨架化后坍缩为单个点。本版改用源字体中对应空心字符的轮廓（`□` `○` `◇` `△`），码位与字宽不变。这是单线字体的固有限制，不是可以修复的缺陷。
 - SketchUp 2022 样本中，“一”1 条边、“十”交点连通、“口”为 4 边闭环、“中”9 边且没有跨框斜线。样本文字在 3.5 mm 和 100 mm 名义 em 下边数一致，无面。整套字体仍需进一步复核。
@@ -70,6 +71,7 @@ result = existing_group.entities.add_stroke_text('标高', height: 10.mm,
 cd tools
 python generate_sample.py --font /path/to/NotoSansCJKsc-Regular.otf --tag full --prune-cycle-tails --tolerance 1.92 --charset-file charset.txt --no-preview --checkpoint /path/to/checkpoint.json
 python finalize_font.py --font /path/to/NotoSansCJKsc-Regular.otf
+python make_superscript.py
 python generate_sample.py --font /path/to/NotoSansCJKsc-Regular.otf --tag holdout --prune-cycle-tails --tolerance 1.92 --charset-file holdout-100.txt
 python audit_holdout.py --font /path/to/NotoSansCJKsc-Regular.otf
 python test_junction_guard.py --font /path/to/NotoSansCJKsc-Regular.otf --lff ../fonts/hei-improved.lff
@@ -80,6 +82,8 @@ ruby sketchup/test_collision.rb
 ```
 
 生成参数为 256px、1.92px 简化容差、em 为 1.3 倍源字体 em；各字不按包围盒缩放。LFF 统一使用 UTF-8 和 LF 换行，以保持跨平台文件哈希一致。生成的文件位于 `tools/fonts/`；如需替换默认字体，验证后将其复制到顶层 `fonts/`。使用时每 500 字保存检查点；输入、参数或生成器哈希发生变化时检查点不会被复用。本版使用 Python 3.12.14、NumPy 2.3.5、Pillow 13.0.0，不同版本可能改变栅格化或骨架结果。
+
+`make_superscript.py` 必须在 `finalize_font.py` 之后运行：它把十个上标数字按合成规则写入 `tools/fonts/hei-improved.lff`，并同步刷新 `tools/full-summary.json` 的字形数、线段数和哈希。该步骤可重复执行，已存在的同名码位会被替换而不是重复追加。
 
 ## 许可证 / Licenses
 
