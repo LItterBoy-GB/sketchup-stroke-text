@@ -12,3 +12,4 @@ venv/
 /tools/data-*.json
 /tools/strokes-*.png
 /tools/audit-holdout.json
+/tools/full-summary.json

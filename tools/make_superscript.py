@@ -1,20 +1,22 @@
-"""Add superscript digits 0-9 to a finalized LFF font, then refresh full-summary.json.
+"""Add superscript digits and signs to a finalized LFF font, then refresh full-summary.json.
 
 The source Noto Sans CJK SC has real superscripts for 1 2 3 4 5 6 7 8 but not for
-0 and 9, so shipping a mix would look inconsistent. All ten are therefore
-synthesized from the plain digit glyphs: scale 0.5, anchored at the top-left
-corner of the digit ink box, which makes each one occupy exactly the top-left
-quarter of the original digit. The advance is copied from the digit so
-"10³" / "m²" / "建筑²层" read as continuous text.
+0 and 9, and has no superscript plus/minus at all, so shipping a mix would look
+inconsistent. Every one is therefore synthesized from the plain glyph: scale 0.5,
+anchored at the top-left corner of the source ink box, which makes each one occupy
+exactly the top-left quarter of the original. The advance is copied from the source
+glyph so "10³" / "m²" / "x⁺" read as continuous text.
 
-Run after finalize_font.py. Idempotent: existing blocks for these ten
-codepoints are replaced, not duplicated.
+Run after finalize_font.py and postprocess_symbols.py. Idempotent: existing blocks
+for these codepoints are replaced, not duplicated.
 """
 import argparse, hashlib, json, re
 from pathlib import Path
 
 SCALE = 0.5
-SLOTS = [(0x00B2, '2'), (0x00B3, '3'), (0x00B9, '1'), (0x2070, '0')] + [(0x2074 + i, str(4 + i)) for i in range(6)]
+SLOTS = [(0x00B2, '2'), (0x00B3, '3'), (0x00B9, '1'), (0x2070, '0')] + \
+        [(0x2074 + i, str(4 + i)) for i in range(6)] + \
+        [(0x207A, '+'), (0x207B, '-')]
 
 root = Path(__file__).resolve().parent
 p = argparse.ArgumentParser()
@@ -105,13 +107,13 @@ data['nonempty_glyphs'] = nonempty
 data['generated_segments'] = segments
 data['superscript_generated'] = {
     'codepoints': ['U+%04X' % cp for cp, _ in sorted(new)],
-    'source_digits': 'U+0030-U+0039',
+    'source': 'U+0030-U+0039 digits, U+002B plus, U+002D hyphen-minus',
     'scale': SCALE,
-    'anchor': 'top-left corner of the source digit ink box',
-    'advance': 'same as the source digit (%.8f)' % advance(by_cp[ord('0')]),
+    'anchor': 'top-left corner of the source ink box',
+    'advance': 'copied from the source glyph',
     'added_paths': sum(sum(1 for l in body if is_geom(l)) for _, body in new),
     'added_segments': sum(len(points(l)) - 1 for _, body in new for l in body if is_geom(l)),
-    'reason': 'source font lacks U+2070 and U+2079, so all ten are derived from the digits to stay consistent',
+    'reason': 'source font lacks U+2070, U+2079, U+207A and U+207B, so all of them are derived to stay consistent',
 }
 summary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf8', newline='\n')
 print('replaced %d existing block(s); wrote %d glyphs, %d segments' % (len(dropped), len(final_blocks), segments))

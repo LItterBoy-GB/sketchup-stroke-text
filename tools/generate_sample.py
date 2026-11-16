@@ -163,13 +163,18 @@ def extract(font,char,tol,prune):
     return result,ink,x0,y0,adj,removed,len(fallback)
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('--font',required=True); parser.add_argument('--size',type=int,default=256); parser.add_argument('--tolerance',type=float,default=1.2); parser.add_argument('--prune-cycle-tails',action='store_true'); parser.add_argument('--tag',default='sample'); parser.add_argument('--charset-file'); parser.add_argument('--no-preview',action='store_true'); parser.add_argument('--checkpoint'); args=parser.parse_args()
+    parser=argparse.ArgumentParser(); parser.add_argument('--font',required=True); parser.add_argument('--size',type=int,default=256); parser.add_argument('--tolerance',type=float,default=1.2); parser.add_argument('--prune-cycle-tails',action='store_true'); parser.add_argument('--tag',default='sample'); parser.add_argument('--charset-file'); parser.add_argument('--no-preview',action='store_true'); parser.add_argument('--checkpoint'); parser.add_argument('--skip-unsupported',action='store_true'); args=parser.parse_args()
     font=ImageFont.truetype(args.font,args.size)
     em=args.size*1.3
     out=['# Format: LibreCAD Font 1','# LetterSpacing: 0','# WordSpacing: %.8f'%(font.getlength(' ')*10/em),'# LineSpacingFactor: 1.3','# Topology-preserving skeleton; modified Noto font; SIL OFL 1.1']
     info={}; chars=''.join(dict.fromkeys(Path(args.charset_file).read_text(encoding='utf8') if args.charset_file else SAMPLE)); images=[]
     cmap=supported(args.font); unsupported=[ch for ch in chars if ord(ch) not in cmap]
-    if unsupported: raise ValueError('source cmap missing: '+repr(unsupported))
+    if unsupported:
+        # 上下标等合成码位不在源字体 cmap 中，由 make_superscript/make_subscript 生成
+        if not args.skip_unsupported: raise ValueError('source cmap missing: '+repr(unsupported))
+        print('skipping %d codepoint(s) absent from source cmap: %s'
+              %(len(unsupported),' '.join('U+%04X'%ord(c) for c in unsupported)),flush=True)
+        chars=''.join(ch for ch in chars if ord(ch) in cmap)
     if args.checkpoint and not args.no_preview: raise ValueError('checkpoint requires --no-preview')
     start=time.monotonic(); source_sha=hashlib.sha256(Path(args.font).read_bytes()).hexdigest()
     signature={'font_sha':source_sha,'chars_sha':hashlib.sha256(chars.encode('utf8')).hexdigest(),'generator_sha':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'size':args.size,'tolerance':args.tolerance,'prune':args.prune_cycle_tails}

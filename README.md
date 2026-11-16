@@ -10,11 +10,12 @@ SketchUp Stroke Text is a Ruby interface for drawing single-line text in SketchU
 
 ## 特点 / Status
 
-- 包含 GB 2312 一级 3,755 字、二级 3,008 字，以及基础字母、数字和部分符号；另有 `Φ`、`Ø`、`㎡`。共 7,155 个字形记录，其中 7,153 个非空，ASCII 与全角空格按字宽推进。原始 glyph 均先经源字体 Unicode cmap 验证。统计和字库哈希见 [full-summary.json](evidence/full-summary.json)。
-- 标点覆盖：ASCII 标点 32 个、中文常用标点 40 个（`，。、；：？！“”‘’（）《》〈〉【】〔〕「」『』—…·～` 等）均已包含。本版补充了 29 个扩展字符：`⑳ ↔ ∂ ∇ ∅ ‐ 〜 ｟ æ Æ ø Å å ß ♡ ¢ £ ¡ ¿` 与上标数字 `⁰¹²³⁴⁵⁶⁷⁸⁹`。其中 `Æ`、`æ`、`ø`、`ß` 等拉丁扩展字母因字符本身含交叉结构，骨架化后段数较多，观感与既有 ASCII 字母一致，未做人工校正。`₽`（卢布符号）不在源字体 cmap 中，未包含。
-- **上标数字为合成字形**：源字体只有 `¹²³⁴⁵⁶⁷⁸`（U+00B9/B2/B3、U+2074–2078），缺 `⁰` 与 `⁹`（U+2070/U+2079），因此十个上标统一由对应数字字形按 0.5 等比缩小、锚定原字形左上角生成，正好占原字形墨迹框的左上四分之一，advance 与原数字相同。这样 `m²`、`10³`、`建筑²层` 这类写法可直接连写；上标顶边与数字大写高度齐平，缩放随字高等比变化。若后续源字体补齐或需要和专业字库完全一致的上标位置，需要重新核对并替换这 10 个字形。
-- 骨架图在交点切分并共享节点；简化线按半像素间隔检查源墨迹。它不保证连续几何始终在墨迹中，也不保证所有笔画结构正确。**点状笔画处理**：骨架化后点会退化为 0.015 字体单位的极短段。SketchUp 对短于 0.001 英寸（0.0254 mm）的边不渲染，3.5 mm 字高下该点只有 0.005 mm，因此不可见。本版把 50 个符号字符中的**孤立点**沿原方向、以原中点为中心拉长到 0.3 单位，在 3.5 mm 字高下为 0.105 mm，随字高等比缩放。判定条件为：符号区字符 + 两点单段 + 长度 < 0.05 单位 + 两端点都不被其他路径共享。因此 `!` `?` `;` `i` `j` `¡` `¿` `¨` `…` `∴` `∷` 等已修复，而箭头尖端、`※` 中心交叉、汉字笔画等与其他路径相连的短段保持不变。
-- **实心符号按空心轮廓绘制**：`■` `●` `◆` `▲` 是实心填充图形，单线字体无法表达填充，骨架化后坍缩为单个点。本版改用源字体中对应空心字符的轮廓（`□` `○` `◇` `△`），码位与字宽不变。这是单线字体的固有限制，不是可以修复的缺陷。
+- 包含 GB 2312 一级 3,755 字、二级 3,008 字，以及基础字母、数字和部分符号；另有 `Φ`、`Ø`、`㎡`。共 7,248 个字形记录，其中 7,246 个非空，ASCII 与全角空格按字宽推进。原始 glyph 均先经源字体 Unicode cmap 验证。统计和字库哈希见 [full-summary.json](evidence/full-summary.json)。
+- 标点覆盖：ASCII 标点 32 个、中文常用标点 40 个（`，。、；：？！“”‘’（）《》〈〉【】〔〕「」『』—…·～` 等）均已包含。前两版补充了 29 个扩展字符：`⑳ ↔ ∂ ∇ ∅ ‐ 〜 ｟ æ Æ ø Å å ß ♡ ¢ £ ¡ ¿` 与上标数字 `⁰¹²³⁴⁵⁶⁷⁸⁹`。其中 `Æ`、`æ`、`ø`、`ß` 等拉丁扩展字母因字符本身含交叉结构，骨架化后段数较多，观感与既有 ASCII 字母一致，未做人工校正。`₽`（卢布符号）不在源字体 cmap 中，未包含。
+- **建筑标注补充 81 字**：希腊字母 47 个（`α–ω`、`Α–Ω`，用于 `φ8@200` 钢筋直径、`Δ` 高差、`α`/`β` 角度、`λ` 长细比、`Σ`/`π` 计算式）、圈码 `⑪–⑲` 9 个、小写罗马数字 `ⅰ–ⅹ` 10 个、单位合字 `㎜ ㎝ ㎞ ㎎ ㎏ ㎥` 6 个、箭头 `▼ ▽ ⇒ ⇐ ⇔` 5 个、分数 `½ ¼ ¾` 3 个、微符号 `µ` 1 个。这批按既有拉丁扩展批次的做法以 512 px 分辨率、1.92 px 容差生成，字库其余部分为 256 px；同一字符在两种分辨率下的拓扑与简化结果一致，512 px 曲线更平滑。`▼` 与 `▲` 一样改用空心 `▽` 轮廓绘制，`ⅰ ⅱ ⅲ …` 的点按孤立点规则拉长为 0.3 单位。
+- **上标、下标与 `⁺⁻` 为合成字形**：源字体只有 `¹²³⁴⁵⁶⁷⁸`（U+00B9/B2/B3、U+2074–2078），缺 `⁰`、`⁹`、`⁺`、`⁻` 与全部下标 `₀–₉`（U+2080–2089），因此这 22 个字形统一由对应数字或符号字形按 0.5 等比缩小生成：上标与 `⁺⁻` 锚定原字形墨迹框左上角，下标锚定左下角，各占原字形对应四分之一，advance 与源字形相同。这样 `m²`、`10³`、`x⁺`、`H₂O` 可直接连写。上标顶边与数字大写高度齐平，缩放随字高等比变化。若后续源字体补齐，或需要与专业字库完全一致的上标位置，需要重新核对并替换这 22 个字形。
+- 骨架图在交点切分并共享节点；简化线按半像素间隔检查源墨迹。它不保证连续几何始终在墨迹中，也不保证所有笔画结构正确。**点状笔画处理**：骨架化后点会退化为 0.5 像素长的极短段（256 px 下 0.015 字体单位，512 px 下 0.0075）。SketchUp 对短于 0.001 英寸（0.0254 mm）的边不渲染，3.5 mm 字高下该点只有 0.005 mm，因此不可见。本版把 58 个符号字符中的**孤立点**沿原方向、以原中点为中心拉长到 0.3 单位，在 3.5 mm 字高下为 0.105 mm，随字高等比缩放。判定条件为：符号区字符 + 两点单段 + 长度 < 0.05 单位 + 两端点都不被其他路径共享。因此 `!` `?` `;` `i` `j` `¡` `¿` `¨` `…` `∴` `∷` `ⅰ ⅱ ⅲ` 等已修复，而箭头尖端、`※` 中心交叉、汉字笔画等与其他路径相连的短段保持不变。
+- **实心符号按空心轮廓绘制**：`■` `●` `◆` `▲` `▼` 是实心填充图形，单线字体无法表达填充，骨架化后坍缩为单个点或一个 Y 形。本版改用源字体中对应空心字符的轮廓（`□` `○` `◇` `△` `▽`），码位与字宽不变。这是单线字体的固有限制，不是可以修复的缺陷。
 - SketchUp 2022 样本中，“一”1 条边、“十”交点连通、“口”为 4 边闭环、“中”9 边且没有跨框斜线。样本文字在 3.5 mm 和 100 mm 名义 em 下边数一致，无面。整套字体仍需进一步复核。
 - v0.3 直接向调用方的 `Sketchup::Entities` 写入边，返回结果 Hash；原 v0.2 返回组的接口已变更。字库和历史运行记录见 [接口验收数据](evidence/entities-api-runtime.json)，该记录针对旧接口。
 - 100 个未参与调参的汉字抽样见 [预览](evidence/strokes-holdout.png) 和 [结果](evidence/audit-holdout.json)。样本的 3,695 个线段按每 0.5 栅格像素取样，没有发现样点落在源墨迹外；该检查不是字形正确性证明。
@@ -69,9 +70,14 @@ result = existing_group.entities.add_stroke_text('标高', height: 10.mm,
 
 ```sh
 cd tools
-python generate_sample.py --font /path/to/NotoSansCJKsc-Regular.otf --tag full --prune-cycle-tails --tolerance 1.92 --charset-file charset.txt --no-preview --checkpoint /path/to/checkpoint.json
+python generate_sample.py --font /path/to/NotoSansCJKsc-Regular.otf --tag full --prune-cycle-tails --tolerance 1.92 --charset-file charset.txt --no-preview --skip-unsupported --checkpoint /path/to/checkpoint.json
 python finalize_font.py --font /path/to/NotoSansCJKsc-Regular.otf
+python postprocess_symbols.py --lff fonts/hei-improved.lff
+python generate_sample.py --font /path/to/NotoSansCJKsc-Regular.otf --tag full-512 --size 512 --prune-cycle-tails --tolerance 1.92 --charset-file charset-512.txt --no-preview
+python postprocess_symbols.py --lff fonts/hei-improved-full-512.lff
+python merge_blocks.py --into fonts/hei-improved.lff --from fonts/hei-improved-full-512.lff
 python make_superscript.py
+python make_subscript.py
 python generate_sample.py --font /path/to/NotoSansCJKsc-Regular.otf --tag holdout --prune-cycle-tails --tolerance 1.92 --charset-file holdout-100.txt
 python audit_holdout.py --font /path/to/NotoSansCJKsc-Regular.otf
 python test_junction_guard.py --font /path/to/NotoSansCJKsc-Regular.otf --lff ../fonts/hei-improved.lff
@@ -81,9 +87,11 @@ ruby sketchup/test_entities.rb
 ruby sketchup/test_collision.rb
 ```
 
-生成参数为 256px、1.92px 简化容差、em 为 1.3 倍源字体 em；各字不按包围盒缩放。LFF 统一使用 UTF-8 和 LF 换行，以保持跨平台文件哈希一致。生成的文件位于 `tools/fonts/`；如需替换默认字体，验证后将其复制到顶层 `fonts/`。使用时每 500 字保存检查点；输入、参数或生成器哈希发生变化时检查点不会被复用。本版使用 Python 3.12.14、NumPy 2.3.5、Pillow 13.0.0，不同版本可能改变栅格化或骨架结果。
+生成参数为 256px、1.92px 简化容差、em 为 1.3 倍源字体 em；各字不按包围盒缩放。补充的拉丁扩展与建筑标注字符另用 512px 生成（同样 1.92px 容差），曲线更平滑，拓扑与简化结果与 256px 一致。LFF 统一使用 UTF-8 和 LF 换行，以保持跨平台文件哈希一致。生成的文件位于 `tools/fonts/`；如需替换默认字体，验证后将其复制到顶层 `fonts/`。使用时每 500 字保存检查点；输入、参数或生成器哈希发生变化时检查点不会被复用。主体字库使用 Python 3.12.14、NumPy 2.3.5、Pillow 13.0.0；建筑标注补充的 81 字使用 Python 3.13.3、NumPy 2.4.6、Pillow 12.2.0 生成，跨环境重跑既有字符抽检 16 个，12 个逐字节一致，4 个差异分别来自合成上标与 512px 批次，因此两个环境的栅格化结果在本次抽检范围内一致。不同版本仍可能改变栅格化或骨架结果。
 
-`make_superscript.py` 必须在 `finalize_font.py` 之后运行：它把十个上标数字按合成规则写入 `tools/fonts/hei-improved.lff`，并同步刷新 `tools/full-summary.json` 的字形数、线段数和哈希。该步骤可重复执行，已存在的同名码位会被替换而不是重复追加。
+`postprocess_symbols.py` 做两件独立的符号修正（拉长符号区的孤立点、用源字体的空心字符替换实心字符），要跑两遍：一遍在 `finalize_font.py` 之后修正 256px 主体，一遍在 512px 批次生成之后修正那批字符，然后用 `merge_blocks.py` 把 512px 的 100 个块合并进主体（已存在的码位就地替换，新码位追加到末尾）。`charset-512.txt` 列出这批 100 个字符：14 个拉丁扩展与符号、5 个标点符号、81 个建筑标注字符。`--skip-unsupported` 让 256px 那一遍跳过源字体 cmap 中不存在的合成码位（`⁰⁵⁶⁷⁸⁹⁺⁻₀–₉`），这些码位最后由 `make_superscript.py`（合成 `⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻`）和 `make_subscript.py`（合成 `₀–₉`）生成，同样可重复执行、已存在的码位被替换。后三个脚本都会刷新字形数、线段数和哈希，默认写 `tools/full-summary.json`；仓库内受版本控制的是 `evidence/full-summary.json`，需要把结果同步过去并补上新增字符的分类记录。
+
+按上述命令从上一版字库重跑一遍，7,155 个既有块逐字节一致，产物 SHA-256 为 `c0eeed4d8fb7b048db6ae57776da1040eaf55a125ea178e9eff57d366691ad19`，与仓库中的 `fonts/hei-improved.lff` 相同。
 
 ## 许可证 / Licenses
 
